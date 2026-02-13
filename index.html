@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CareConnect AI</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header class="topbar">
+<div class="logo">Care<span>Connect</span></div>
+<nav>
+<a href="#support">Support</a>
+<a href="#volunteer">Volunteer</a>
+<a href="dashboard.html" class="dashboard-btn">Dashboard</a>
+</nav>
+</header>
+
+<section class="hero">
+<h1>AI-Powered Healthcare Support</h1>
+<p>Helping NGOs prioritize medical requests intelligently.</p>
+<button class="primary-btn" onclick="scrollToSupport()">Get Started</button>
+</section>
+
+<section class="section" id="support">
+<h2>Patient Support Request</h2>
+
+<div class="form-container">
+<div class="glass-card">
+<form id="supportForm">
+<input type="text" placeholder="Full Name" required>
+<input type="text" id="issue" placeholder="Describe Issue (Emergency / Serious / Normal)" required>
+<textarea id="details" placeholder="Additional Details"></textarea>
+<button type="submit" class="primary-btn">Submit Request</button>
+</form>
+</div>
+
+<div id="aiResult"></div>
+</div>
+</section>
+
+<section class="section" id="volunteer">
+<h2>Volunteer Registration</h2>
+
+<div class="glass-card">
+<form id="volunteerForm">
+<input type="text" placeholder="Full Name" required>
+<input type="email" placeholder="Email" required>
+<input type="text" placeholder="Skill (Doctor / Nurse / Helper)" required>
+<button type="submit" class="primary-btn">Register</button>
+</form>
+<div id="volMsg" class="success-msg"></div>
+</div>
+</section>
+
+<footer>
+© 2026 CareConnect AI | NGO Support Automation
+</footer>
+
+<!-- Chat Toggle -->
+<div class="chat-toggle">💬</div>
+
+<!-- Chatbot -->
+<div class="chatbot">
+<div class="chat-header">CareBot Assistant</div>
+<div class="chat-body" id="chatBody"></div>
+<input type="text" id="chatInput" placeholder="Ask something...">
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>

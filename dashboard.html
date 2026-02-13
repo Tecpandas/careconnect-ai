@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Dashboard | CareConnect</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+
+<div class="dashboard-layout">
+
+<aside class="sidebar">
+<h2>CareConnect</h2>
+<a href="index.html">Home</a>
+<a href="#">Analytics</a>
+<a href="#">Requests</a>
+</aside>
+
+<main class="main-content">
+<h1>NGO Dashboard</h1>
+
+<div class="stats-grid">
+<div class="stat-card">
+<h2 id="reqCount">0</h2>
+<p>Total Support Requests</p>
+</div>
+
+<div class="stat-card">
+<h2 id="volCount">0</h2>
+<p>Total Volunteers</p>
+</div>
+
+<div class="stat-card">
+<h2>AI Active</h2>
+<p>Smart Prioritization Running</p>
+</div>
+</div>
+
+<!-- CHART -->
+<div class="glass-card" style="margin-top:40px;">
+<h3>Priority Analytics</h3>
+<canvas id="priorityChart"></canvas>
+</div>
+
+<!-- TABLE -->
+<div class="glass-card table-container">
+<h3>Recent Requests</h3>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Issue</th>
+<th>Priority</th>
+<th>Date</th>
+</tr>
+</thead>
+<tbody id="requestTable">
+</tbody>
+</table>
+</div>
+
+</main>
+</div>
+
+<script>
+let requests = JSON.parse(localStorage.getItem("requestData")) || [];
+
+document.getElementById("reqCount").innerText = requests.length;
+document.getElementById("volCount").innerText =
+localStorage.getItem("volunteers") || 0;
+
+/* TABLE POPULATION */
+let table = document.getElementById("requestTable");
+requests.forEach(req=>{
+table.innerHTML += `
+<tr>
+<td>${req.name}</td>
+<td>${req.issue}</td>
+<td>${req.priority}</td>
+<td>${req.date}</td>
+</tr>
+`;
+});
+
+/* ANALYTICS */
+let high=0, medium=0, low=0;
+requests.forEach(r=>{
+if(r.priority==="High") high++;
+if(r.priority==="Medium") medium++;
+if(r.priority==="Low") low++;
+});
+
+new Chart(document.getElementById("priorityChart"),{
+type:"doughnut",
+data:{
+labels:["High","Medium","Low"],
+datasets:[{
+data:[high,medium,low],
+backgroundColor:["#dc2626","#f59e0b","#16a34a"]
+}]
+}
+});
+</script>
+
+</body>
+</html>
